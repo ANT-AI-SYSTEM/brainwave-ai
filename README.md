@@ -555,16 +555,4 @@ Typical latencies:
 
 ---
 
-## Developer
-
-**Q.U.A.N.T** was developed by **Shreshth Kaushik**, an online educator, businessman, and programmer known for simplifying complex topics with innovative teaching methods.
-
-- **Website:** [theshreshthkaushik.com](https://www.theshreshthkaushik.com/)
-- **Instagram:** [@theshreshthkaushik](https://www.instagram.com/theshreshthkaushik/)
-- **Telegram:** [t.me/theshreshthkaushik](https://t.me/theshreshthkaushik)
-- **YouTube:** [Shreshth Kaushik](https://www.youtube.com/channel/UC7A5u12yVIZaCO_uXnNhc5g)
-- **Jarvis for Everyone:** [jarvis4everyone.com](https://jarvis4everyone.com)
-
-> For the latest version of Jarvis and updates, visit **[Jarvis for Everyone](https://jarvis4everyone.com)**.
-
 **Start chatting:** `python run.py` then open http://localhost:8000
