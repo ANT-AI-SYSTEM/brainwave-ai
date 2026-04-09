@@ -17,9 +17,7 @@ from concurrent.futures import ThreadPoolExecutor, TimeoutError as FuturesTimeou
 import edge_tts
 from app.models import ChatRequest, ChatResponse, TTSRequest
 
-@app.get("/")
-def root():
-    return {"status": "running"}
+
 
 RATE_LIMIT_MESSAGE = (
     "You've reached your daily API limit for this assistant. "
