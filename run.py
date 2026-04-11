@@ -1,3 +1,4 @@
+import os
 import subprocess
 import sys
 from pathlib import Path
@@ -6,7 +7,6 @@ import uvicorn
 
 
 def _ensure_thinking_audio():
-
     try:
         result = subprocess.run(
             [sys.executable, "-m", "app.generate_thinking_audio"],
@@ -28,26 +28,15 @@ if __name__ == "__main__":
     _ensure_thinking_audio()
 
     try:
+        port = int(os.environ.get("PORT", 10000))  # 🔥 IMPORTANT
+
         uvicorn.run(
             "app.main:app",
             host="0.0.0.0",
-            port=8000,
-            reload=True,
+            port=port,
+            reload=False,  # 🔥 disable in production
         )
 
-    except OSError as e:
-        if "address already in use" in str(e).lower() or "10048" in str(e):
-            print(
-                "[ERROR] Port 8000 is already in use. "
-                "Try another port or stop the other process."
-            )
-        else:
-            print(f"[ERROR] Server failed to start: {e}")
-            sys.exit(1)
-
-    except KeyboardInterrupt:
-        print("\n[INFO] Server stopped by user.")
-
     except Exception as e:
-        print(f"[ERROR] Unexpected error: {e}")
+        print(f"[ERROR] Server failed: {e}")
         sys.exit(1)

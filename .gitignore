@@ -16,6 +16,17 @@ env/
 database/vector_store/
 database/chats_data/
 
+# ML / embeddings cache
+*.bin
+*.pt
+*.onnx
+.cache/
+huggingface/
+
+# Runtime / DB
+*.sqlite3
+*.db
+
 # OS files
 .DS_Store
 Thumbs.db
@@ -26,3 +37,6 @@ Thumbs.db
 # IDE
 .vscode/
 .idea/
+
+# Node (future)
+node_modules/
