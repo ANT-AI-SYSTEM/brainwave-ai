@@ -17,6 +17,8 @@ from concurrent.futures import ThreadPoolExecutor, TimeoutError as FuturesTimeou
 import edge_tts
 from app.models import ChatRequest, ChatResponse, TTSRequest
 
+
+
 RATE_LIMIT_MESSAGE = (
     "You've reached your daily API limit for this assistant. "
     "Your credits will reset in a few hours, or you can upgrade your plan for more. "
