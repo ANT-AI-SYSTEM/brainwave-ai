@@ -11,7 +11,7 @@ if __name__ == "__main__":
     try:
         port = int(os.environ.get("PORT", 10000))
 
-        print("🚀 Starting server...")
+        print("Starting server...")
         print(f"PORT: {port}")
 
         uvicorn.run(
@@ -19,11 +19,11 @@ if __name__ == "__main__":
             host="0.0.0.0",
             port=port,
             reload=False,
-            log_level="debug",   # 🔥 ADD THIS
+            log_level="debug",  
         )
 
     except Exception as e:
         print(f"[ERROR] Server failed: {e}")
         import traceback
-        traceback.print_exc()   # 🔥 ADD THIS
+        traceback.print_exc()  
         sys.exit(1)
