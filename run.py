@@ -1,14 +1,9 @@
 import os
-import subprocess
 import sys
-from pathlib import Path
-
 import uvicorn
 
 
 if __name__ == "__main__":
-
-    _ensure_thinking_audio()
 
     try:
         port = int(os.environ.get("PORT", 10000))
@@ -17,7 +12,7 @@ if __name__ == "__main__":
             "app.main:app",
             host="0.0.0.0",
             port=port,
-            reload=False,  
+            reload=False,
         )
 
     except Exception as e:
