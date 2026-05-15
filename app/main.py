@@ -19,13 +19,6 @@ from app.models import ChatRequest, ChatResponse, TTSRequest
 
 
 
-from fastapi import FastAPI
-
-app = FastAPI()
-
-@app.get("/")
-def read_root():
-    return {"message": "Hello World"}
 
 
 
@@ -106,7 +99,6 @@ async def lifespan(app: FastAPI):
         logger.info("Initializing vector store service...")
         t0 = time.perf_counter()
         vector_store_service = VectorStoreService()
-        vector_store_service.create_vector_store()
         logger.info("[TIMING] startup_vector_store: %.3fs", time.perf_counter() - t0)
 
         logger.info("Initializing Groq service (general queries)...")
@@ -657,17 +649,7 @@ async def root_redirect():
     return RedirectResponse(url="/app/", status_code=302)
     
 
-def run():
-    uvicorn.run(
-        "app.main:app",
-        host="0.0.0.0",
-        port=8000,
-        reload=True,
-        log_level="info"
-    )
-
-if __name__ == "__main__":
-    run()
+d
 
     
 
