@@ -19,6 +19,16 @@ from app.models import ChatRequest, ChatResponse, TTSRequest
 
 
 
+from fastapi import FastAPI
+
+app = FastAPI()
+
+@app.get("/")
+def read_root():
+    return {"message": "Hello World"}
+
+
+
 RATE_LIMIT_MESSAGE = (
     "You've reached your daily API limit for this assistant. "
     "Your credits will reset in a few hours, or you can upgrade your plan for more. "
