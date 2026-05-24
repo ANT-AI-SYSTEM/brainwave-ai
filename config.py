@@ -137,7 +137,7 @@ TTS_RATE = os.getenv("TTS_RATE", "+22%")
 # CHUNK_SIZE: How many characters to split documents into
 # CHUNK_OVERLAP: How many characters overlap between chunks (helps maintain context)
 
-EMBEDDING_MODEL = "BAAI/bge-small-en-v1.5"
+EMBEDDING_MODEL = "sentence-transformers/all-MiniLM-L6-v2"
 CHUNK_SIZE = 1000  # Characters per chunk
 CHUNK_OVERLAP = 200  # Overlap between chunks
 

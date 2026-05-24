@@ -3,8 +3,8 @@ import logging
 from pathlib import Path
 from typing import List, Optional
 from langchain_text_splitters import RecursiveCharacterTextSplitter
+from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_community.vectorstores import FAISS
-from langchain_community.embeddings import FastEmbedEmbeddings   # ← changed
 from langchain_core.documents import Document
 
 from config import(
@@ -22,17 +22,17 @@ class VectorStoreService:
 
     def __init__(self):
         
-        self.embeddings = FastEmbedEmbeddings(   # ← changed
-            model_name=EMBEDDING_MODEL,
+        self.embeddings = HuggingFaceEmbeddings(
+            model_name = EMBEDDING_MODEL,
+            model_kwargs ={"device": "cpu"},
         )
         self.text_splitter = RecursiveCharacterTextSplitter(
-            chunk_size=CHUNK_SIZE,
-            chunk_overlap=CHUNK_OVERLAP,
+            chunk_size = CHUNK_SIZE,
+            chunk_overlap = CHUNK_OVERLAP,
         )
         self.vector_store: Optional[FAISS] = None
-        self._retriever_cache: dict = {}
 
-   
+        self._retriever_cache: dict = {}
 
     
     def load_learning_data(self) -> list[Document]:
