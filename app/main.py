@@ -96,39 +96,43 @@ async def lifespan(app: FastAPI):
     )
 
     try:
-        logger.info("Initializing vector store service...")
-        t0 = time.perf_counter()
-        vector_store_service = VectorStoreService()
-        logger.info("[TIMING] startup_vector_store: %.3fs", time.perf_counter() - t0)
+        def _init_all():
+            global vector_store_service, groq_service, realtime_service, brain_service, chat_service
 
-        logger.info("Initializing Groq service (general queries)...")
-        groq_service = GroqService(vector_store_service)
-        logger.info("Groq service initialized successfully")
+            logger.info("Initializing vector store service...")
+            t0 = time.perf_counter()
+            vector_store_service = VectorStoreService()
+            logger.info("[TIMING] startup_vector_store: %.3fs", time.perf_counter() - t0)
 
-        logger.info("Initializing Realtime Groq service (with Tavily search)...")
-        realtime_service = RealtimeGroqService(vector_store_service)
-        logger.info("Realtime Groq service initialized successfully")
+            logger.info("Initializing Groq service (general queries)...")
+            groq_service = GroqService(vector_store_service)
+            logger.info("Groq service initialized successfully")
 
-        logger.info("Initializing Brain service (Groq query classification)...")
-        brain_service = BrainService()
-        logger.info("Brain service initialized successfully")
+            logger.info("Initializing Realtime Groq service (with Tavily search)...")
+            realtime_service = RealtimeGroqService(vector_store_service)
+            logger.info("Realtime Groq service initialized successfully")
 
-        logger.info("Initializing chat service...")
-        chat_service = ChatService(groq_service, realtime_service, brain_service)
-        logger.info("Chat service initialized successfully")
+            logger.info("Initializing Brain service (Groq query classification)...")
+            brain_service = BrainService()
+            logger.info("Brain service initialized successfully")
 
-        logger.info("=" * 60)
-        logger.info("Service Status:")
-        logger.info(" - Vector Store: Ready")
-        logger.info(" - Groq AI (General): Ready")
-        logger.info(" - Groq AI (Realtime): Ready")
-        logger.info(" - Brain (Groq): Ready")
-        logger.info(" - Chat Service: Ready")
-        logger.info("=" * 60)
-        logger.info("J.A.R.V.I.S is online and ready!")
-        logger.info("API: http://localhost:8000")
-        logger.info("Frontend: http://localhost:8000/app/ (open in browser)")
-        logger.info("=" * 60)
+            logger.info("Initializing chat service...")
+            chat_service = ChatService(groq_service, realtime_service, brain_service)
+            logger.info("Chat service initialized successfully")
+
+            logger.info("=" * 60)
+            logger.info("Service Status:")
+            logger.info(" - Vector Store: Ready")
+            logger.info(" - Groq AI (General): Ready")
+            logger.info(" - Groq AI (Realtime): Ready")
+            logger.info(" - Brain (Groq): Ready")
+            logger.info(" - Chat Service: Ready")
+            logger.info("=" * 60)
+            logger.info("J.A.R.V.I.S is online and ready!")
+            logger.info("=" * 60)
+
+        loop = asyncio.get_event_loop()
+        await loop.run_in_executor(None, _init_all)
 
         yield
 
