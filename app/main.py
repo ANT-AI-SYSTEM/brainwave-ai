@@ -649,7 +649,7 @@ async def root_redirect():
     return RedirectResponse(url="/app/", status_code=302)
     
 
-d
+
 
     
 
